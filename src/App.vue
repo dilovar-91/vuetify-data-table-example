@@ -2,15 +2,15 @@
   <v-app>
     <v-app-bar app dark>
       <div class="d-flex align-center mr-2">
-        bezKoder
+        MIlano
       </div>
 
       <v-btn to="/tutorials" text>
-        Tutorials
+        Товары
       </v-btn>
 
       <v-btn to="/add" text>
-        Add
+        Добавить
       </v-btn>
     </v-app-bar>
 
