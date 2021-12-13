@@ -20,21 +20,43 @@
           disable-pagination
           :hide-default-footer="true"
         >
-         <template v-slot:[`images`]="{ images }">
-           <template v-for="(item, i) in images">            
-            <v-img
-            lazy-src="https://via.placeholder.com/150/0000FF/808080%20?Text=Digital.com"
-            max-height="150"
-            max-width="250"
-            src="https://via.placeholder.com/150/0000FF/808080%20?Text=Digital.com"
+         <template v-slot:item = "{item, index}" >    
+           <tr :key="index">
+             <td><v-icon x-large color="error">mdi-close</v-icon></td>
+             <td>
+               <img   
+            v-for="(image, i) in item.images"        
+            height="50"
+            width="50"
             :key="i"
-          ></v-img>
+            :src="'http://parser/images/1/'+image"           
+          />  
+          </td>
+          <td>{{item.name}}</td>
+          <td>{{item.color_name}}</td>
+          <td> <v-icon small class="mr-2" @click="editTutorial(item.id)">mdi-pencil</v-icon>
+            <v-icon small @click="deleteTutorial(item.id)">mdi-delete</v-icon></td>
+            <td>
+
+            
+   <div class="pa-4 rounded-circle d-inline-block" style="background-color:red; border: 2px #f6f6f6 solid; cursor:pointer;" @click="changeColor(item.id, 'red')"
+      ></div>
+   <div class="pa-4 rounded-circle d-inline-block" style="background-color:white;  border: 2px #f6f6f6 solid; cursor:pointer;" @click="changeColor(item.id, 'red')"
+      ></div>
+   <div class="pa-4 rounded-circle d-inline-block" style="background-color:yellow;  border: 2px #f6f6f6 solid; cursor:pointer;" @click="changeColor(item.id, 'red')"
+      ></div>
+   <div class="pa-4 rounded-circle d-inline-block" style="background-color:blue;  border: 2px #f6f6f6 solid; cursor:pointer;" @click="changeColor(item.id, 'red')"
+      ></div>
+   <div class="pa-4 rounded-circle d-inline-block" style="background-color:green;  border: 2px #f6f6f6 solid; cursor:pointer;" @click="changeColor(item.id, 'red')"
+      ></div>
+   <div class="pa-4 rounded-circle d-inline-block" style="background-color:#f6f6f6;  border: 2px #f6f6f6 solid; cursor:pointer;" @click="changeColor(item.id, 'red')"
+      ></div>
+     
+            </td>
+           </tr>                 
+            
           </template>
-          </template>
-          <template v-slot:[`item.actions`]="{ item }">
-            <v-icon small class="mr-2" @click="editTutorial(item.id)">mdi-pencil</v-icon>
-            <v-icon small @click="deleteTutorial(item.id)">mdi-delete</v-icon>
-          </template>
+          
         </v-data-table>
 
         <v-card-actions v-if="tutorials.data.length > 0" class="mr-auto ml-auto">
@@ -52,6 +74,13 @@
     </v-col>
   </v-row>
 </template>
+<style scoped>
+#rounded-card {
+  border-radius: 50%; 
+  min-height: 50px;
+  min-width: 50px;
+}
+</style>
 
 <script>
 import TutorialDataService from "../services/TutorialDataService";
@@ -63,6 +92,7 @@ export default {
       page: 1,
       title: "",
       headers: [
+        { text: "Цыет выбран", align: "start", sortable: false, value: "images" },
         { text: "Фото", align: "start", sortable: false, value: "images" },
         { text: "Название", align: "start", sortable: false, value: "name" },
         { text: "Описание", value: "description", sortable: false },
