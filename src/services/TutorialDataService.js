@@ -21,6 +21,10 @@ class TutorialDataService {
     return http.delete(`/products/${id}`);
   }
 
+  setColor(id, color, color_code) {
+    return http.get(`/set-color?id=${id}&color=${color}&color_code=${color_code}`);
+  }
+
   deleteAll() {
     return http.delete(`/products`);
   }
